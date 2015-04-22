@@ -1,0 +1,53 @@
+#************************************************************************************
+#Locking a terminal using a shell script. 
+#This script locks your terminal until you enter correct password (open2world)
+#It also traps signals and interrupts 
+#You can't terminate the script by Ctrl+c or Ctrl+\ or Ctrl+z and Ctrl+d 
+#************************************************************************************
+
+clear
+trap "" 1 2 3 20
+lines=`tput lines`
+b=`expr $lines / 2 - 4 `
+
+## center function
+
+center()
+{
+columns=`tput cols`
+until [ -z "$1" ]
+do
+for ((i=1;i<$(((columns-${#1})/2));i++)) do echo -n " " done echo -e "\033[1m \033[5m \033[42m $1 \033[0m " shift done } ## End of center function while true do clear tput cup $b 0
+center " TERMINAL LOCKED "
+center "Press any key to unlock"
+read key
+echo -n "enter password : "
+read -s password
+while true
+do
+if [ $password = "open2world" ]
+then
+clear
+break 2
+# breaks second outer loop
+else
+echo -e "\n You are an illegal user "
+echo -e "\n Enter any key"
+read
+break
+fi
+done
+done
+
+Analysis :
+
+The trap command allows you to execute a command when a signal is received by your script. It works like this:
+
+trap arg signals
+
+"signals" is a list of signals to interrupt and "arg" is a command to execute when one of the signals is received. If "arg" is not supplied script doesn't do any thing after receiving signal.
+
+Note: Two signals "SIGKILL" "SIGSTOP" are unable to trap
+
+Ex: trap "echo signal received" 1 2 3 15
+(or use SIGHUP SIGINT SIGQUIT SIGTERM instead of 1 2 3 15 )
